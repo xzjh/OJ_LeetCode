@@ -27,7 +27,11 @@ class Solution:
  			else:
  				return -1
 
- 		return index
+ 		# index is a possible start
+ 		if sum(net) >= 0:
+ 			return index
+ 		else:
+ 			return -1
 
 s = Solution()
 a=[1,1]

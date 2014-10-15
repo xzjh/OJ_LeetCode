@@ -1,3 +1,5 @@
+from random import random
+
 # Definition for singly-linked list.
 class ListNode:
 	def __init__(self, x):
@@ -10,7 +12,9 @@ class Solution:
 
 	@staticmethod
 	def partition(l, left, right):
-		pivot = l[right].val
+		pivot_index = int(left + random() * (right - left))
+		pivot = l[pivot_index].val
+		l[pivot], l[right] = l[right], l[pivot]
 		cur = left
 		for i in range(left, right):
 			if l[i].val < pivot:
@@ -21,11 +25,23 @@ class Solution:
 
 	@staticmethod
 	def quickSort(l, left, right):
-		if left >= right:
-			return
-		p = Solution.partition(l, left, right)
-		Solution.quickSort(l, left, p - 1)
-		Solution.quickSort(l, p + 1, right)
+		stack = []
+		if left < right:
+			p = Solution.partition(l, left, right)
+			# Solution.quickSort(l, left, p - 1)
+			# Solution.quickSort(l, p + 1, right)
+			if left < p - 1:
+				stack.extend([left, p - 1])
+			if p + 1 < right:
+				stack.extend([p + 1, right])
+			while len(stack) > 0:
+				ri = stack.pop()
+				le = stack.pop()
+				p = Solution.partition(l, le, ri)
+				if le < p - 1:
+					stack.extend([le, p - 1])
+				if p + 1 < ri:
+					stack.extend([p + 1, ri])
 
 	def sortList(self, head):
 		if head == None:
@@ -52,4 +68,4 @@ for i in range(len(l2)-1):
 n1.next = n2
 #print s.sortList(n1).val
 Solution.quickSort(l2, 0, len(l2)-1)
-print map(lambda x: x.val, l)
+print map(lambda x: x.val, l2)

@@ -5,9 +5,9 @@
 #         self.next = None
 
 class Solution:
-    # @param head, a ListNode
-    # @return a list node
-    def detectCycle(self, head):
+	# @param head, a ListNode
+	# @return a list node
+	def detectCycle(self, head):
 		if head == None or head.next == None:
 			return None
 		a = head

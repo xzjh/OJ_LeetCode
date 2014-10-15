@@ -10,52 +10,55 @@ class Solution:
 	# @param head, a ListNode
 	# @return a ListNode
 
-	@staticmethod
-	def partition(l, left, right):
-		pivot_index = int(left + random() * (right - left))
-		pivot = l[pivot_index].val
-		l[pivot], l[right] = l[right], l[pivot]
-		cur = left
-		for i in range(left, right):
-			if l[i].val < pivot:
-				l[cur], l[i] = l[i], l[cur]
-				cur += 1
-		l[cur], l[right] = l[right], l[cur]
-		return cur
+	# @staticmethod
+	# def partition(l, left, right):
+	# 	pivot_index = int(left + random() * (right - left))
+	# 	pivot = l[pivot_index].val
+	# 	l[pivot], l[right] = l[right], l[pivot]
+	# 	cur = left
+	# 	for i in range(left, right):
+	# 		if l[i].val < pivot:
+	# 			l[cur], l[i] = l[i], l[cur]
+	# 			cur += 1
+	# 	l[cur], l[right] = l[right], l[cur]
+	# 	return cur
 
-	@staticmethod
-	def quickSort(l, left, right):
-		stack = []
-		if left < right:
-			p = Solution.partition(l, left, right)
-			# Solution.quickSort(l, left, p - 1)
-			# Solution.quickSort(l, p + 1, right)
-			if left < p - 1:
-				stack.extend([left, p - 1])
-			if p + 1 < right:
-				stack.extend([p + 1, right])
-			while len(stack) > 0:
-				ri = stack.pop()
-				le = stack.pop()
-				p = Solution.partition(l, le, ri)
-				if le < p - 1:
-					stack.extend([le, p - 1])
-				if p + 1 < ri:
-					stack.extend([p + 1, ri])
+	# @staticmethod
+	# def quickSort(l, left, right):
+	# 	stack = []
+	# 	if left < right:
+	# 		p = Solution.partition(l, left, right)
+	# 		# Solution.quickSort(l, left, p - 1)
+	# 		# Solution.quickSort(l, p + 1, right)
+	# 		if left < p - 1:
+	# 			stack.extend([left, p - 1])
+	# 		if p + 1 < right:
+	# 			stack.extend([p + 1, right])
+	# 		while len(stack) > 0:
+	# 			ri = stack.pop()
+	# 			le = stack.pop()
+	# 			p = Solution.partition(l, le, ri)
+	# 			if le < p - 1:
+	# 				stack.extend([le, p - 1])
+	# 			if p + 1 < ri:
+	# 				stack.extend([p + 1, ri])
 
-	def sortList(self, head):
-		if head == None:
-			return None
-		l = [head]
-		next_node = head.next
-		while next_node != None:
-			l.append(next_node)
-			next_node = next_node.next
-		Solution.quickSort(l, 0, len(l) - 1)
-		for i in range(len(l) - 1):
-			l[i].next = l[i + 1]
-		l[-1].next = None
-		return l[0]
+	class Solution:
+		# @param head, a ListNode
+		# @return a ListNode
+		def sortList(self, head):
+			if head == None:
+				return None
+			l = [head]
+			next_node = head.next
+			while next_node != None:
+				l.append(next_node)
+				next_node = next_node.next
+			l = sorted(l, key = lambda x: x.val)
+			for i in range(len(l) - 1):
+				l[i].next = l[i + 1]
+			l[-1].next = None
+			return l[0]
 
 s = Solution()
 n1 = ListNode(2)

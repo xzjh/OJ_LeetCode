@@ -6,6 +6,8 @@ class Solution:
 		q = [start_point]
 		while len(q) > 0:
 			p = q.pop(0)
+			if board[p[0]][p[1]] != 'O':
+				continue
 			board[p[0]][p[1]] = 'Y'
 			if p[1] - 1 >= 0 and board[p[0]][p[1] - 1] == 'O':
 				q.append((p[0], p[1] - 1))
@@ -32,6 +34,7 @@ class Solution:
 			return board
 
 		h, w = len(board), len(board[0])
+
 		for i in range(w):
 			if board[0][i] == 'O':
 				self.BFS(board, (0, i), (h, w))
@@ -43,10 +46,8 @@ class Solution:
 				self.BFS(board, (i, 0), (h, w))
 			if board[i][w - 1] == 'O':
 				self.BFS(board, (i, w - 1), (h, w))
-				
-		board = map(lambda x: map(rep, x), board)
-		return board
 
-s = Solution()
-b = [['X', 'X', 'X', 'X'], ['X', 'O', 'O', 'X'], ['X', 'X', 'O', 'X'], ['X', 'O', 'X', 'X']]
-print s.solve(b)
+		for i in range(h):
+			for j in range(w):
+				board[i][j] = board[i][j].replace('O', 'X').replace('Y', 'O')
+

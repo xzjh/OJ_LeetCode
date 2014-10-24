@@ -17,7 +17,6 @@ class Solution:
 		high = length - 1
 		low = 0
 		while high >= low:
-			print high,low
 			i = (high + low) / 2
 			v = get_value(i)
 			if v == target:

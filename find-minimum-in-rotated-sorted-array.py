@@ -6,16 +6,16 @@ class Solution:
 			return None
 		l = 0
 		h = len(num) - 1
-		p = (l + h) / 2
-		while h - l > 1:
-			if num[l] < num[p] and num[p] < num[h]:
+		while h >= l:
+			p = (h + l) / 2
+			if num[l] <= num[p] and num[p] <= num[h]:
 				return num[l]
 			elif num[l] > num[p]:
 				h = p
+				l += 1
 			elif num[p] > num[h]:
-				l = p
-			p = (h + l) / 2
-		return min(num[l], num[h])
+				l = p + 1
+		return num[p]
 
 s = Solution()
-print s.findMin([1])
+print s.findMin([2,1])

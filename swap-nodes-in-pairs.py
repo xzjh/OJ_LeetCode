@@ -1,8 +1,8 @@
 # Definition for singly-linked list.
-class ListNode:
-	def __init__(self, x):
-		self.val = x
-		self.next = None
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
 
 class Solution:
 	# @param a ListNode
@@ -20,10 +20,7 @@ class Solution:
 			next_node.next = this_node
 			prev_node.next = next_node
 			prev_node = this_node
-			if this_node.next:
-				this_node = this_node.next
-			else:
-				break
+			this_node = this_node.next
 		return head
 
 n1 = ListNode(1)
